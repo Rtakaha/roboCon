@@ -7,8 +7,14 @@
  * http://robotsquare.com/wp-content/uploads/2013/10/45544_educator.pdf
  * http://thetechnicgear.com/2014/03/howto-create-line-following-robot-using-mindstorms/
  */
-
 #include "ev3api.h"
+#include "app.h"
+#include <unistd.h>
+#include <ctype.h>
+#include <string.h>
+
+
+#include <stdlib.h>
 #include "app.h"
 
 #define DEBUG
@@ -28,6 +34,8 @@
  * Right motor:  Port C
  */
 const int touch_sensor = EV3_PORT_2, color_sensor = EV3_PORT_3, left_motor = EV3_PORT_B, right_motor = EV3_PORT_C;
+
+static lcdfont_t font = EV3_FONT_MEDIUM;
 
 static void button_clicked_handler(intptr_t button) {
     switch(button) {
@@ -54,15 +62,24 @@ void main_task(intptr_t unused) {
     /**
      * Calibrate for light intensity of WHITE
      */
+
+	int32_t fontw, fonth;
+	ev3_lcd_set_font(font);
+	ev3_font_get_size(font, &fontw, &fonth);
+
     ev3_speaker_play_tone(NOTE_C4, 100);
     tslp_tsk(100);
     ev3_speaker_play_tone(NOTE_C4, 100);
+    ev3_lcd_draw_string("Press for WHITE.\n", 0, 10);
     // TODO: Calibrate using maximum mode => 100
     printf("Press the touch sensor to measure light intensity of WHITE.\n");
     while(!ev3_touch_sensor_is_pressed(touch_sensor));
     while(ev3_touch_sensor_is_pressed(touch_sensor));
     int white = ev3_color_sensor_get_reflect(color_sensor);
     printf("WHITE light intensity: %d.\n", white);
+    char str[12];
+    sprintf(str, "%d", white);
+    ev3_lcd_draw_string(str, 0, 20);
 
     /**
      * Calibrate for light intensity of BLACK
@@ -81,6 +98,7 @@ void main_task(intptr_t unused) {
     /**
      * PID controller
      */
+    /*
     float lasterror = 0, integral = 0;
     float midpoint = (white - black) / 2 + black;
     while (1) {
@@ -91,4 +109,5 @@ void main_task(intptr_t unused) {
         lasterror = error;
         tslp_tsk(1);
     }
+    */
 }

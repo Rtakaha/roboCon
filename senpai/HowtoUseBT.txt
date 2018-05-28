@@ -1,0 +1,17 @@
+1.EV3に挿してあるSDカード内の ev3rt/etc/rc.conf.ini ファイルで
+[Debug]
+DefaultPort = BT	に変更
+
+2.EV3を起動、PCのBluetooth設定画面でEV3と接続
+（名前はデフォルトだとMindstorms EV3 変更可）
+
+3.ターミナル上でmake app,app転送後
+screen /dev/tty.MindstormsEV3-SerialPor 115200
+ログが表示される画面へ（MindstormsEV3は名前を変えたら変更する必要あるかも）
+
+プログラム上では#include "ev3api.h"して
+// Bluetooth仮想シリアルポートのファイルをオープンする
+	FILE *bt = ev3_serial_open_file(EV3_SERIAL_BT);
+
+// 書式化した文字列をBluetooth仮想シリアルポートへ書き込む
+	fprintf(bt, "/*出力内容*/\r\n", 変数等);
