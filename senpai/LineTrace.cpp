@@ -80,7 +80,7 @@ void LineTrace::Calibration(){
 
     while(1){
 
-        msg_f("Set brack", 2);
+        msg_f("Set black", 2);
         if(ev3_button_is_pressed(RIGHT_BUTTON)){
             ev3_speaker_play_tone(NOTE_CS4,300);
             black = color.getBrightness();

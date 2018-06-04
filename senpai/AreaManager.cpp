@@ -273,7 +273,7 @@ void AreaManager::Manager(){
 	/*int curve_f = 0;
 	int gray_on = 0;*/
 
-	/*モータの位置調整などは呼び出し前に済ませておく*/
+	/*モータの位置調整などは呼び出し前に済ませておく */
 
 	if(currentcource == R_cource){
 

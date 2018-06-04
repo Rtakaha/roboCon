@@ -98,7 +98,6 @@ void main_task(intptr_t unused) {
     /**
      * PID controller
      */
-    /*
     float lasterror = 0, integral = 0;
     float midpoint = (white - black) / 2 + black;
     while (1) {
@@ -109,5 +108,4 @@ void main_task(intptr_t unused) {
         lasterror = error;
         tslp_tsk(1);
     }
-    */
 }
