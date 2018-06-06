@@ -7,7 +7,7 @@
 
 #include "Localization.h"
 // Bluetooth仮想シリアルポートのファイルをオープンする
-    FILE *bt = ev3_serial_open_file(EV3_SERIAL_BT);
+//    FILE *bt = ev3_serial_open_file(EV3_SERIAL_BT);
 
 Localization::Localization():
 rightWheel(PORT_B),leftWheel(PORT_C){
@@ -72,7 +72,7 @@ void Localization::SetPoint(){
         degree = degree - 360.0;
     }*/
 
-    fprintf(bt,"x=%f, y=%f, deg=%f \r\n",x,y,degree);
+//    fprintf(bt,"x=%f, y=%f, deg=%f \r\n",x,y,degree);
 
     XYtoMap();
 }

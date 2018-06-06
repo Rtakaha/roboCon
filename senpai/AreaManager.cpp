@@ -9,7 +9,7 @@ memo
 
 #include "AreaManager.h"
 
-//FILE *bt = ev3_serial_open_file(EV3_SERIAL_BT);
+FILE *bt = ev3_serial_open_file(EV3_SERIAL_BT);
 
 AreaManager::AreaManager():
 touch(PORT_1),sonar(PORT_2),color(PORT_3),/*,gyro(PORT_4),*/
@@ -280,6 +280,7 @@ void AreaManager::Manager(){
 		switch(currentstate){
 
 			case START:
+				fprintf(bt, "START\r\n");
 
 				local.Init();
 
@@ -300,14 +301,15 @@ void AreaManager::Manager(){
 
 
 			case STRAIGHT1:
+				fprintf(bt, "STRAIGHT1\r\n");
 				//速め Motorでただの直進指示でもいいかも
 				msg_f("1", 3);
 				ev3_led_set_color(LED_RED);
 				/*linetrace.PIDSetRun(50, 0.35, 0.03, 0.025, 1);*/
-				if(speed < 80){
+				if(speed < 50){
 					speed = speed + 1;
 				}//ここはいらないかも？
-				else if(speed > 80){
+				else if(speed > 50){
 					speed = speed - 1;
 				}
 				linetrace.PIDSetRun(speed, 0.365, 0.05, 0.120, 1);//ずれてる
@@ -324,6 +326,8 @@ void AreaManager::Manager(){
 
 
 			case CURVE1:
+				fprintf(bt, "CURVE1\r\n");
+
 				//中速 ただの円弧なのでsteerの関数でもいいかも
 				msg_f("2", 3);
 				ev3_led_set_color(LED_GREEN);
@@ -362,10 +366,10 @@ void AreaManager::Manager(){
 				
 				if(curve_f == 0){
 					ev3_led_set_color(LED_ORANGE);
-					if(speed > 50){
+					if(speed > 30){
 						speed = speed - 1;
 					}
-					else if(speed < 50){
+					else if(speed < 30){
 						speed = speed + 1;
 					}
 					linetrace.PIDSetRun(speed, 0.40, 0.03, 0.085, 1);//30, 0.20, 0.070
@@ -806,10 +810,10 @@ End:
 				/*linetrace.PIDSetRun(50, 0.35, 0.03, 0.025, 1);*/
 				//linetrace.PIDSetRun(60, 0.365, 0.05, 0.09, 1);
 				/*linetrace.PIDSetRun(60 ,0.45, 0.00, 0.025); */
-				if(speed < 80){
+				if(speed < 30){
 					speed = speed + 1;
 				}//ここはいらないかも？
-				else if(speed > 80){
+				else if(speed > 30){
 					speed = speed - 1;
 				}
 				//linetrace.PIDSetRun(speed, 0.365, 0.05, 0.120, 1);//ずれてる
