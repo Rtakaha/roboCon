@@ -36,101 +36,6 @@ void AreaManager::Init(){
 
 	//fprintf(bt, "BlueTooth接続成功\r\n");
 
-	/*//コード入力
-	while(1){
-		NumberDisplay(codecount);
-
-		msg_f("Set 5-figures",2);
-		if(ev3_button_is_pressed(UP_BUTTON)){
-			codecount=codecount+1;
-		}
-		clock.wait(500);
-		if(ev3_button_is_pressed(DOWN_BUTTON)){
-			codecount=codecount-1;
-		}
-
-		if(ev3_button_is_pressed(LEFT_BUTTON)){
-			code=codecount*10000;
-			codecount=0;
-			break;
-		}
-    }
-    while(1){
-    	NumberDisplay(codecount);
-
-		msg_f("Set 4-figures",2);
-		if(ev3_button_is_pressed(UP_BUTTON)){
-			codecount=codecount+1;
-		}
-		clock.wait(500);
-		if(ev3_button_is_pressed(DOWN_BUTTON)){
-			codecount=codecount-1;
-		}
-		if(ev3_button_is_pressed(LEFT_BUTTON)){
-			code=codecount*1000 + code;
-			codecount=0;
-			break;
-		}
-    }
-    while(1){
-    	NumberDisplay(codecount);
-
-		msg_f("Set 3-figures",2);
-		if(ev3_button_is_pressed(UP_BUTTON)){
-			codecount=codecount+1;
-		}
-		clock.wait(500);
-		if(ev3_button_is_pressed(DOWN_BUTTON)){
-			codecount=codecount-1;
-		}
-		if(ev3_button_is_pressed(LEFT_BUTTON)){
-			code=codecount*100 + code;
-			codecount=0;
-			break;
-		}
-    }
-    while(1){
-    	NumberDisplay(codecount);
-
-		msg_f("Set 2-figures",2);
-		if(ev3_button_is_pressed(UP_BUTTON)){
-			codecount=codecount+1;
-		}
-		clock.wait(500);
-		if(ev3_button_is_pressed(DOWN_BUTTON)){
-			codecount=codecount-1;
-		}
-		if(ev3_button_is_pressed(LEFT_BUTTON)){
-			code=codecount*10 + code;
-			codecount=0;
-			break;
-		}
-    }
-    while(1){
-    	NumberDisplay(codecount);
-
-		msg_f("Set 1-figures",2);
-		if(ev3_button_is_pressed(UP_BUTTON)){
-			codecount=codecount+1;
-		}
-		clock.wait(500);
-		if(ev3_button_is_pressed(DOWN_BUTTON)){
-			codecount=codecount-1;
-		}
-		if(ev3_button_is_pressed(LEFT_BUTTON)){
-			code=codecount + code;
-			codecount=0;
-			break;
-		}
-    }
-
-    block.codecalculation(code);
-
-
-    //コード入力終了*/
-
-
-
 	//キャリブレーション処理
 	linetrace.Calibration();
 	black = linetrace.Getblack();
@@ -155,11 +60,7 @@ void AreaManager::Init(){
 			msg_f("R Cource", 1);
 			currentcource = R_cource;
 			currentstate = START;
-			//currentstate = CURVE2;
-			//currentstate = STRAIGHT2;
-			//currentstate = ETSUMOU;
 			linetrace.SetEdge(1);	//右回転から（合ってる？）
-			//linetrace.Calibration();
 			break;
 		}
 
@@ -168,99 +69,6 @@ void AreaManager::Init(){
 			currentcource = L_cource;
 			currentstate = START_L;
 
-			/*while(1){
-				NumberDisplay(codecount);
-
-				msg_f("Set 5-figures",2);
-				if(ev3_button_is_pressed(UP_BUTTON)){
-					codecount=codecount+1;
-				}
-				clock.wait(500);
-				if(ev3_button_is_pressed(DOWN_BUTTON)){
-					codecount=codecount-1;
-				}
-
-				if(ev3_button_is_pressed(LEFT_BUTTON)){
-					code=codecount*10000;
-					codecount=0;
-					break;
-				}
-    		}
-    		while(1){
-    			NumberDisplay(codecount);
-
-				msg_f("Set 4-figures",2);
-				if(ev3_button_is_pressed(UP_BUTTON)){
-					codecount=codecount+1;
-				}
-				clock.wait(500);
-				if(ev3_button_is_pressed(DOWN_BUTTON)){
-					codecount=codecount-1;
-				}
-				if(ev3_button_is_pressed(LEFT_BUTTON)){
-					code=codecount*1000 + code;
-					codecount=0;
-					break;
-				}
-  		  	}
-   			while(1){
-   			 	NumberDisplay(codecount);
-
-				msg_f("Set 3-figures",2);
-				if(ev3_button_is_pressed(UP_BUTTON)){
-					codecount=codecount+1;
-				}
-				clock.wait(500);
-				if(ev3_button_is_pressed(DOWN_BUTTON)){
-					codecount=codecount-1;
-				}
-				if(ev3_button_is_pressed(LEFT_BUTTON)){
-					code=codecount*100 + code;
-					codecount=0;
-					break;
-				}
-    		}
-   		 	while(1){
-    			NumberDisplay(codecount);
-
-				msg_f("Set 2-figures",2);
-				if(ev3_button_is_pressed(UP_BUTTON)){
-					codecount=codecount+1;
-				}
-				clock.wait(500);
-				if(ev3_button_is_pressed(DOWN_BUTTON)){
-					codecount=codecount-1;
-				}
-				if(ev3_button_is_pressed(LEFT_BUTTON)){
-					code=codecount*10 + code;
-					codecount=0;
-					break;
-				}
-   		 	}
-    		while(1){
-    			NumberDisplay(codecount);
-
-				msg_f("Set 1-figures",2);
-				if(ev3_button_is_pressed(UP_BUTTON)){
-					codecount=codecount+1;
-				}
-				clock.wait(500);
-				if(ev3_button_is_pressed(DOWN_BUTTON)){
-					codecount=codecount-1;
-				}
-				if(ev3_button_is_pressed(LEFT_BUTTON)){
-					code=codecount + code;
-					codecount=0;
-					break;
-				}
-   			}
-
-   			block.codecalculation(code);*/
-
-
-   			 //コード入力終了
-
-			//currentstate = STRAIGHT_L2;
 			linetrace.SetEdge(1);
 
 			break;
@@ -773,6 +581,25 @@ End:
 		
 	}
 
+/*
+Lコース
+modified by Takahashi 2018/06/11
+STRAIGHT_L1
+CURVE_L1 (左回転)
+STRAIGHT_L2
+CURVE_L2 (右回転)
+STRAIGHT_L3
+CURVE_L3 (右回転)
+STRAIGHT_L4
+CURVE_L4 (左回転)
+STRAIGHT_L5
+
+LineTrace::PIDSetRun(int pwm,float newp,float newi,float newd,float curve)
+	curve=1で左折、curve=-1で右折
+	ラインの左側を通る
+	左折の時はP小さめ、右折の時はP大きめ
+*/
+
 	else if(currentcource == L_cource){
 
 		switch(currentstate){
@@ -782,82 +609,55 @@ End:
 				local.Init();
 
 				msg_f("Ready ...", 1);
-
 				if(touch.isPressed() == 1){
 					msg_f("Go !", 1);
 					clock.wait(1500);	//数秒待つ
 					currentstate = STRAIGHT_L1;
-					//currentstate = CURVE_L1;
-					//currentstate = STRAIGHT_L2;
-					//currentstate = PARKING_L;
 				}
-
 				break;
-
-				//msg_f("Ready ...", 1);
-
-				//if(touch.isPressed() == 1){
-				//	msg_f("Go !", 1);
-				//	clock.wait(1500);	//数秒待つ
-				/*currentstate = BLOCK;
-				wup_tsk(MAIN_TASK);*/
-				//}
 
 			case STRAIGHT_L1:
 				ev3_led_set_color(LED_GREEN);
 				//速め Motorでただの直進指示でもいいかも
-				msg_f("1", 3);
-				/*linetrace.PIDSetRun(50, 0.35, 0.03, 0.025, 1);*/
-				//linetrace.PIDSetRun(60, 0.365, 0.05, 0.09, 1);
-				/*linetrace.PIDSetRun(60 ,0.45, 0.00, 0.025); */
-				if(speed < 30){
+				msg_f("L_S1", 3);
+				if(speed < 50){
 					speed = speed + 1;
 				}//ここはいらないかも？
-				else if(speed > 30){
+				else if(speed > 50){
 					speed = speed - 1;
 				}
-				//linetrace.PIDSetRun(speed, 0.365, 0.05, 0.120, 1);//ずれてる
-				linetrace.PIDSetRun(speed, 0.450, 0.05, 0.120, 1);//ずれてる 0.460, 0.60
+				linetrace.PIDSetRun(speed, 0.300, 0.05, 0.150, 1);
+				//　左カーブは　0.450, 0.05, 0.120, 1 -> 最後のカーブ
 
 				local.SetPoint();
 
-				if(local.GetX() >= 2260){/*単位はmm 2260*/
+				//現在のxとthetaの値を再セットする
+				if(local.GetX() >= 2260){//単位はmm
 					//local.Init();
 					int theta, x;
 					x = local.GetX();
 					theta = local.GetTheta();
 					local.CorrectLocalization(x, 0, theta, 3);
-					currentstate = CURVE_L1;
+					//currentstate = CURVE_L1;
 				}
-
+                
 				break;
 
-			case CURVE_L1:
-				//中速 ただの円弧なのでsteerの関数でもいいかも
+			case CURVE_L1://左回転
 				ev3_led_set_color(LED_RED);
-				msg_f("2", 3);
+				msg_f("L_C1", 3);
 				if(speed < 38){//36
 					speed = speed + 1;
 				}//ここはいらないかも？
 				else if(speed > 38){
 					speed = speed - 1;
 				}
-				/*linetrace.PIDSetRun(25,0.32, 0.06, 0.025); */
-				//linetrace.PIDSetRun(speed, 0.38, 0.03, 0.080, 1);
-				//linetrace.PIDSetRun(speed, 0.35, 0.03, 0.080, 1);
-				//linetrace.PIDSetRun(speed, 0.70, 0.00, 0.080, 1);//イマココ
-				//linetrace.PIDSetRun(speed, 0.70, 0.00, 0.060, 1);
-				//linetrace.PIDSetRun(speed, 0.720, 0.00, 0.080, 1);良さげ
-				//linetrace.PIDSetRun(speed, 0.45, 0.03, 0.065, 1);//0.45, 0.070 折原
-				linetrace.PIDSetRun(speed, 0.55, 0.03, 0.070, 1);//いいんじゃないか？
+				linetrace.PIDSetRun(speed, 0.55, 0.03, 0.070, 1);
 
 				local.SetPoint();
 
-				/*if(local.GetLen() >= 750){ 
-					local.Init();
-					currentstate = CURVE2;
-				}*/
-
+				// 一定距離曲がれば次のステージへ行くようにプログラムを変更
+				// local.GetY() > 1000 とか
 				if(local.GetX() < 2260){
 					//local.Init();
 					currentstate = CURVE_L2;
@@ -865,97 +665,9 @@ End:
 				}
 				break;
 
-			case CURVE_L2:
-				ev3_led_set_color(LED_GREEN);
-				msg_f("3", 3);
-				//中速 途中で曲がる方向が変わるのでedge切り替えするといいかも
-				/*linetrace.PIDSetRun(25,0.32, 0.06, 0.025);*/
-				if(speed < 43){//40
-					speed = speed + 1;
-				}//ここはいらないかも？
-				else if(speed > 43){//40
-					speed = speed - 1;
-				}
-
-				/*if(local.GetX() <= 900 && correct == 0){
-					int x2, theta2;
-					x2 = local.GetX();
-					theta2 = local.GetTheta();
-					local.CorrectLocalization(x2, 0, theta2, 3);
-					correct == 1;
-				}*/
-
-				if(local.GetY() > -500){
-					correct = 1;
-				}
-
-				//linetrace.PIDSetRun(speed, 0.60, 0.00, 0.05, 1);
-				//linetrace.PIDSetRun(speed, 0.55, 0.00, 0.055, 1);
-				//linetrace.PIDSetRun(speed, 0.40, 0.00, 0.055, 1);//良さげ
-				linetrace.PIDSetRun(speed, 0.35, 0.03, 0.060, 1);//良さげ 0.35, 0.50 折原
-				//linetrace.PIDSetRun(speed, 0.38, 0.00, 0.065, 1);//良さげ 0.35, 0.50
-
-
-				local.SetPoint();
-
-				if(local.GetY() < /*250*/-500 && correct == 1){//-900
-					//steer.setPower(0,0);
-					local.Init();
-					currentstate = CURVE_L3;
-					/*linetrace.SetEdge(1);*/
-				}
-
-				break;
-
-			case CURVE_L3:
-				ev3_led_set_color(LED_RED);
-
-				//while(1){steer.setPower(0, 0);}
-
-				msg_f("4", 3);
-				if(speed < 35){//30ok
-					speed = speed + 1;
-				}//ここはいらないかも？
-				else if(speed > 35){
-					speed = speed - 1;
-				}
-				/*if(local.GetY() < 100){
-					linetrace.PIDSetRun(speed, 0.38, 0.00, 0.065, 1);
-				}*/
-				//else{
-					//linetrace.PIDSetRun(speed, 0.38, 0.02, 0.065, -1);
-				//}
-				/*if(black_on == 0){
-					leftWheel.setPWM(15);//20
- 				    rightWheel.setPWM(-5);
- 				    if(color.getColorNumber() != COLOR_BLACK){
- 				    	clock.wait(100);
- 				    	black_on = 1;
- 				    	speed = 0;
- 				    }
-				}*/
-				//else{
-					ev3_led_set_color(LED_ORANGE);
-					/*if(speed < 35){
-						speed = speed + 1;
-					}*/
-					linetrace.PIDSetRun(speed, 0.47, 0.03, 0.075, 1);//0.55, 0.080ok
-				//}
-
-				local.SetPoint();
-
-				if(local.GetX() > 1070){//1000
-					local.Init();
-					currentstate = STRAIGHT_L2;
-					/*linetrace.SetEdge(1);*/
-				}
-
-				break;
-
 			case STRAIGHT_L2:
-				msg_f("5", 3);
+				msg_f("L_S2", 3);
 
-				//linetrace.PIDSetRun(70, 0.36, 0.03, 0.12, 1);
 				ev3_led_set_color(LED_RED);
 				if(speed < 70){
 					speed = speed + 1;
@@ -975,7 +687,6 @@ End:
  				    }
 				}
 				else{
-					//linetrace.PIDSetRun(60, 0.36, 0.03, 0.12, -1);
 					if(second > 100){
 						leftWheel.setPWM(38);//28
  				  		rightWheel.setPWM(40);//30
@@ -987,239 +698,87 @@ End:
 				}
 
 				local.SetPoint();
-
-				if(local.GetLen() >= /*1700*/ 1800){
+				// local.GetY() >= 2500とか
+				if(local.GetLen() >= 1800){
 					local.Init();
-					currentstate = BRANCH;
+					currentstate = CURVE_L2;
 					linetrace.SetEdge(-1); //意味ない(linetrace.PIDSetRunの引数curveをマイナスに設定するべし)
 				}
 
 				break;
 
-			case BRANCH:
-
-				msg_f("6", 3);
-
-				//local.SetPoint();
-
-				if(local.GetLen() < 1100){//1000
-					linetrace.PIDSetRun(25, 0.320, 0, 0.060, -1);
-        			local.SetPoint();
-				}
-				else{
-					ev3_stp_cyc(TRACER_CYC);//この時点で複数のサイクルが残ってるかも？
-
-					ev3_led_set_color(LED_ORANGE);
-
-				/*rightWheel.setPWM(0);
-				leftWheel.setPWM(0);
-				local.Init();
-				clock.wait(200);
-
-				while(local.GetTheta() > -20){
-					rightWheel.setPWM(-10);
-					leftWheel.setPWM(10);
-					local.SetPoint();
+			case CURVE_L2://右回転
+				ev3_led_set_color(LED_GREEN);
+				msg_f("L_C2", 3);
+				//中速 途中で曲がる方向が変わるのでedge切り替えするといいかも
+				if(speed < 43){//40
+					speed = speed + 1;
+				}//ここはいらないかも？
+				else if(speed > 43){//40
+					speed = speed - 1;
 				}
 
-				local.Init();
-				clock.wait(200);
-
-				while(local.GetLen() < 20){
-					rightWheel.setPWM(10);
-					leftWheel.setPWM(10);
-					local.SetPoint();
+				if(local.GetY() > -500){
+					correct = 1;
 				}
 
-				local.Init();
-				clock.wait(200);
+				linetrace.PIDSetRun(speed, 0.35, 0.03, 0.060, 1);//良さげ 0.35, 0.50 折原
 
-				while(local.GetTheta() < 20){
-					rightWheel.setPWM(10);
-					leftWheel.setPWM(-10);
-					local.SetPoint();
-				}
+				local.SetPoint();
 
-				rightWheel.setPWM(0);
-				leftWheel.setPWM(0);
-				local.Init();
-				linetrace.ColorHistoryReset();
-				clock.wait(400);*/
-
-				//ev3_led_set_color(LED_GREEN);
-
-				/*linetrace.Setgray(gray - 15);
-
-				while(local.GetLen() < 400){
-
-					local.SetPoint();
-					linetrace.PIDSetRun(15, 0.25, 0.02, 0.03, -1);
-					clock.wait(4);
-				}
-
-
-				linetrace.Setgray(gray);*/
-
-				/*while(local.GetLen() < 700){
-
-					local.SetPoint();
-					linetrace.PIDSetRun(50, 0.35, 0.02, 0.07, -1);
-					clock.wait(4);//PIDSetRunは4m秒周期のため
-
-				}*/
-
-					//ev3_stp_cyc(TRACER_CYC);
-
-					while(color_on == 0){
-
-					/*if(speed < 15){
-						speed = speed + 1;
-					}//ここはいらないかも？
-					else if(speed > 15){
-						speed = speed - 1;
-					}*/
-
-						local.SetPoint();
-					//linetrace.PIDSetRun(5, 0.15, 0, 0.006, -1);
-					//linetrace.PIDSetRun(25, 0.23, 0, 0.02, -1);//元々
-						//linetrace.PIDSetRun(15, 0.105, 0, 0.01, -1);//0.2フレすぎ 0.007
-						linetrace.PIDSetRun(5,0.05,0,0.009,-1);//5,0.20,0,0.009
-
-
-						if(color.getColorNumber() == 3){
-
-							rightWheel.setPWM(0);
-							leftWheel.setPWM(0);
-							color_on = 1;
-
-						}
-
-					//clock.wait(4);
-
-					}
-
+				if(local.GetY() < /*250*/-500 && correct == 1){//-900
+					//steer.setPower(0,0);
 					local.Init();
-					goto Block;
-
+					currentstate = STRAIGHT_L3;
+					/*linetrace.SetEdge(1);*/
 				}
 
-				//local.Init();
-
-
-					/*while(1){
-
-						if(color_on == 0 && search == 0){
-
-							ev3_led_set_color(LED_ORANGE);
-
-							linetrace.PIDSetRun(20, 0.36, 0.03, 0.08, -1);
-
-							clock.wait(1000);
-							search = 1;
-
-						}
-						else if(color_on == 0 && search == 1){
-
-							rightWheel.setPWM(0);
-							leftWheel.setPWM(0);
-
-							if(color.getColorNumber() == 3){
-								color_on = 1;
-							}
-
-							clock.wait(600);
-							search = 0;
-
-						}
-						else{
-
-							local.Init();
-							//currentstate = BLOCK;
-							break;
-						}
-
-						clock.wait(4);//擬似周期処理的な
-
-					}*/
-
-				//goto Block;
-
-					/*if(color.getColorNumber() == 3){
-						local.Init();
-						currentstate = BLOCK;
-						linetrace.SetEdge(1);
-					}
-					else{
-						linetrace.PIDSetRun(20, 0.36, 0.03, 0.08, -1);
-					}*/
-
 				break;
 
-			case BLOCK:
-
-Block:
-				msg_f("block", 5);
-				msg_f("Ready ...", 1);
-				block.init();
-
-   				block.codecalculation(16210);
-
-				/*while(1){
-					if(touch.isPressed() == 1){
-						msg_f("Go !", 1);
-						clock.wait(1500);	//数秒待つ
-						break;
-					}
-				}*/
-
-				block.blockLineup();
-
-				//wup_tsk(MAIN_TASK);
-				//goto Parking_L;
-				local.Init();
-				currentstate = PARKING_L;
-				ev3_sta_cyc(TRACER_CYC);
+			case STRAIGHT_L3:
+				msg_f("L_S3", 3);
 				break;
 
+
+			case CURVE_L3://右回転
+				ev3_led_set_color(LED_RED);
+
+				msg_f("L_C3", 3);
+				if(speed < 35){//30ok
+					speed = speed + 1;
+				}//ここはいらないかも？
+				else if(speed > 35){
+					speed = speed - 1;
+				}
+				ev3_led_set_color(LED_ORANGE);
+				linetrace.PIDSetRun(speed, 0.47, 0.03, 0.075, 1);//0.55, 0.080ok
+
+				local.SetPoint();
+
+				if(local.GetX() > 1070){//1000
+					local.Init();
+					currentstate = STRAIGHT_L4;
+					/*linetrace.SetEdge(1);*/
+				}
+				break;
+
+			case STRAIGHT_L4:
+				msg_f("L_S4", 3);
+				break;
+
+
+			// goalの後
+			case CURVE_L4://左回転
+				msg_f("L_C4", 3);
+				break;
+
+			// case AI:
+			// 	msg_f("AI", 3);
+			// 	break;
+
+			// AIアンサー終了後、縦列駐車
 			case PARKING_L:
-Parking_L:
 				msg_f("parking_L", 5);
-
-				/*while(local.GetX() < 500){//ライン上に行くまで直進
-					leftWheel.setPWM(20);
-        			rightWheel.setPWM(20);
-					local.SetPoint();
-				}
-
-				local.Init();
-
-				while(local.GetLen() < 700){//駐車場までライントレース
-					linetrace.PIDSetRun(10, 0.25, 0.00, 0.02, 1);
-					local.SetPoint();
-				}
-
-				local.Init();
-
-				while(local.GetTheta() < 90){//駐車場に向けて回転
-					leftWheel.setPWM(-20);
-        			rightWheel.setPWM(20);
-					local.SetPoint();
-				}
-
-				while(local.GetY() < 400){//駐車場に入る
-					leftWheel.setPWM(20);
-        			rightWheel.setPWM(20);
-					local.SetPoint();
-				}
-
-				while(local.GetTheta() > 0){//縦に駐車
-					leftWheel.setPWM(20);
-        			rightWheel.setPWM(-20);
-					local.SetPoint();
-				}
-
-				leftWheel.stop(); rightWheel.stop();
-				goto End_L;*/
 
 				if(local.GetX() < 350 && park_l == 0){//350
 					leftWheel.setPWM(30);//20
@@ -1273,6 +832,85 @@ Parking_L:
 				}
 
 				break;
+
+			case BRANCH:
+				msg_f("br", 3);
+
+				//local.SetPoint();
+
+				if(local.GetLen() < 1100){//1000
+					linetrace.PIDSetRun(25, 0.320, 0, 0.060, -1);
+        			local.SetPoint();
+				}
+				else{
+					ev3_stp_cyc(TRACER_CYC);//この時点で複数のサイクルが残ってるかも？
+
+					ev3_led_set_color(LED_ORANGE);
+
+				local.Init();
+				clock.wait(200);
+
+				while(local.GetLen() < 20){
+					rightWheel.setPWM(10);
+					leftWheel.setPWM(10);
+					local.SetPoint();
+				}
+
+				local.Init();
+				clock.wait(200);
+
+				while(local.GetTheta() < 20){
+					rightWheel.setPWM(10);
+					leftWheel.setPWM(-10);
+					local.SetPoint();
+				}
+
+				rightWheel.setPWM(0);
+				leftWheel.setPWM(0);
+				local.Init();
+				linetrace.ColorHistoryReset();
+				clock.wait(400);
+
+				linetrace.Setgray(gray);
+
+					while(color_on == 0){
+
+						local.SetPoint();
+						linetrace.PIDSetRun(5,0.05,0,0.009,-1);//5,0.20,0,0.009
+
+						if(color.getColorNumber() == 3){
+
+							rightWheel.setPWM(0);
+							leftWheel.setPWM(0);
+							color_on = 1;
+
+						}
+
+					}
+
+					local.Init();
+					goto Block;
+
+				}
+				break;
+
+			case BLOCK:
+
+Block:
+				msg_f("block", 5);
+				msg_f("Ready ...", 1);
+				block.init();
+
+   				block.codecalculation(16210);
+
+				block.blockLineup();
+
+				local.Init();
+				currentstate = PARKING_L;
+				ev3_sta_cyc(TRACER_CYC);
+				break;
+
+
 
 			case END_L:
 End_L:
@@ -1396,14 +1034,5 @@ void AreaManager::NumberDisplay(int codecount){
 }
 
 void AreaManager::regularLine(){
-	//if(local.GetLen() < 300){
-		//linetrace.PIDSetRun(30, 0.30, 0.00, 0.040, 1);//15 0.35 0.00 0.030 -1
-		//linetrace.PIDSetRun(15, 0.35, 0.00, 0.030, 1);//p 0.35
 		linetrace.PIDSetRun(25, 0.320, 0, 0.060, 1);
-		//local.SetPoint();
-	//}
-	//else{
-		//local.Init();
-		//ev3_stp_cyc(CYCLE_CYC);
-	//}
 }
