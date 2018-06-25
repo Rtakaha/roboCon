@@ -48,6 +48,7 @@ void LineTrace::PIDSetRun(int pwm,float newp,float newi,float newd,float curve){
 
     float turn = pid.PIDSetRun(ave_color,gray/*+10*/,newp,newi,newd/*,curve*/);
     
+    // curve = 1で左折、curve = -1 で右折
     turn = turn * curve;
     
     int pwm_l = pwm - turn;

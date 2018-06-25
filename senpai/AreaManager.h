@@ -52,9 +52,13 @@ enum L_state{
 	START_L,		//スタート動作
 	STRAIGHT_L1,	//スタート直後の直線
 	CURVE_L1,		//右カーブ
-	CURVE_L2,		//ゲート１通過から２通過までの曲線
-	CURVE_L3,		//直線までの急なカーブ
 	STRAIGHT_L2,	//スピードコースゴールまで
+	CURVE_L2,		//ゲート１通過から２通過までの曲線
+	STRAIGHT_L3,	//スピードコースゴールまで
+	CURVE_L3,		//直線までの急なカーブ
+	STRAIGHT_L4,	//スピードコースゴールまで
+	CURVE_L4,		//直線までの急なカーブ
+	STRAIGHT_L5,	//スピードコースゴールまで
 	BRANCH,			//黒線分岐
 	BLOCK,			//ブロック並べ開始位置から終了位置まで
 	PARKING_L,		//縦列駐車
