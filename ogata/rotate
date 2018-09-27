@@ -1,0 +1,15 @@
+/*引数は回転する角度
+ev3_motor_rotate(port,degrees,speed,blocking);
+blocking=true:回転してから次を読む
+        false:回転を待たずに次を読む
+*/
+
+void Tracer::rotate(int gyr){
+  msg_f("Rotating.", 1);
+int angle=gyr*5/3;/*タイヤの回転角=回転したい角度*5/3*/
+ev3_motor_rotate(EV3_PORT_B,angle,100,false);
+ev3_motor_rotate(EV3_PORT_C,-angle,100,true);
+
+}
+
+/*クラス名を変更してヘッダに関数登録して使用可能*/

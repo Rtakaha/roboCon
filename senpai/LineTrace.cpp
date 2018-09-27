@@ -1,9 +1,11 @@
+// senpai
 /*
 * Linetrace.h
 * written by kimoto on 2017/05/16
 */
 
 #include "LineTrace.h"
+#include "ev3api.h"
 
 //コンストラクタ
 LineTrace::LineTrace():
@@ -20,7 +22,7 @@ void LineTrace::SetEdge(int newedge){
 }
 
 //PID制御しながらライントレース
-void LineTrace::PIDSetRun(int pwm,float newp,float newi,float newd,float curve){
+void LineTrace::PIDSetRun(int bright, int pwm,float newp,float newi,float newd,float curve){
 
   //  msg_f("PIDstart", 2);
 
@@ -30,7 +32,7 @@ void LineTrace::PIDSetRun(int pwm,float newp,float newi,float newd,float curve){
     for(int i = 0; i < 9; i++){
         colorHistory[i] = colorHistory[i+1];//最も古いデータを消している
     }
-    colorHistory[9] = NormalizeLine(color.getBrightness());
+    colorHistory[9] = NormalizeLine(bright);
 
  //   msg_f("PIDhistory", 3);
 
@@ -78,13 +80,17 @@ void LineTrace::Calibration(){
         white = color.getBrightness();
         break;
     }*/
+    char msgbuf[100];
 
     while(1){
-
         msg_f("Set black", 2);
         if(ev3_button_is_pressed(RIGHT_BUTTON)){
             ev3_speaker_play_tone(NOTE_CS4,300);
+            msg_f("", 2);
+
             black = color.getBrightness();
+            sprintf(msgbuf, "Black: %d", black);
+            ev3_lcd_draw_string(msgbuf, 4, 80);
             break;
         }
      }
@@ -95,6 +101,10 @@ void LineTrace::Calibration(){
         if(ev3_button_is_pressed(LEFT_BUTTON)){
             ev3_speaker_play_tone(NOTE_GS4,300);
             white = color.getBrightness();
+            msg_f("", 2);
+
+            sprintf(msgbuf, "White: %d", white);
+            ev3_lcd_draw_string(msgbuf, 6, 110);
             break;
         }
     }
@@ -103,6 +113,7 @@ void LineTrace::Calibration(){
     normalize = 100 / (white - black);
 
     gray = 40;
+    // gray = 40;
 
     /*gray = black + (white - black) / 2;*/
 
@@ -111,6 +122,16 @@ void LineTrace::Calibration(){
 
 float LineTrace::NormalizeLine(int value/*ラインの値*/){
     value = (value - black) * normalize;
+
+    if(value < 20 || value > 312){
+        hey = 0;
+    }
+    else{
+        if (hey < 60){
+            hey++;
+        }
+    }
+
 
     if(value > 100){
         return 100;

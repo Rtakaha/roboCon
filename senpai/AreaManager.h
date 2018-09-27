@@ -97,6 +97,8 @@ private:
 	int park_l3 = 0;
 	int park_l4 = 0;
 
+	int bright;
+
 	int black; //キャリブレーション後の黒の値
 	int white;
 	float normalize;
@@ -124,6 +126,7 @@ private:
 public:
 	AreaManager();
 	void Init();
+	void Brightness();
 	void Manager();
 	void NumberDisplay(int codecount);
 	void regularLine();

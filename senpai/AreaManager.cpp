@@ -1,3 +1,4 @@
+// senpai
 /*
 AreaManager.h
 written by kimoto 2017/06/29
@@ -8,14 +9,23 @@ memo
 */
 
 #include "AreaManager.h"
+#include "ev3api.h"
 
 FILE *bt = ev3_serial_open_file(EV3_SERIAL_BT);
+char msgbuf[100];
 
 AreaManager::AreaManager():
 touch(PORT_1),sonar(PORT_2),color(PORT_3),/*,gyro(PORT_4),*/
 frontarm(PORT_A),rightWheel(PORT_B),leftWheel(PORT_C),steer(leftWheel,rightWheel){
 
 }
+
+//お試し変数たち
+int GRAY = 20;
+int count = 0;
+int loop = 0;
+int16_t val;
+int hey = 0;
 
 void AreaManager::Init(){
 
@@ -27,7 +37,7 @@ void AreaManager::Init(){
 	rightWheel.reset();
 
 	//アームを確実に下に向ける
-	frontarm.setPWM(-5); //回転方向？
+	frontarm.setPWM(0); //回転方向？
 	clock.wait(1000);
 	frontarm.reset();
 
@@ -55,7 +65,6 @@ void AreaManager::Init(){
 	ev3_speaker_play_tone(NOTE_AS4,300);
 	
 	while(1){
-
 		if(ev3_button_is_pressed(RIGHT_BUTTON)){
 			msg_f("R Cource", 1);
 			currentcource = R_cource;
@@ -66,14 +75,132 @@ void AreaManager::Init(){
 
 		if(ev3_button_is_pressed(LEFT_BUTTON)){
 			msg_f("L Cource", 1);
+
+				//サザエさん
+				// ev3_speaker_play_tone(NOTE_G4,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_C5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_C5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_C5,150);
+				// clock.wait(200);
+
+				// ev3_speaker_play_tone(NOTE_C5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_C5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_C5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_D5,150);
+				// clock.wait(200);
+
+				// ev3_speaker_play_tone(NOTE_E5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_D5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_C5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_C5,150);
+				// clock.wait(1000);
+
+				// ev3_speaker_play_tone(NOTE_A4,350);
+				// clock.wait(400);
+				// ev3_speaker_play_tone(NOTE_D5,350);
+				// clock.wait(400);
+				// ev3_speaker_play_tone(NOTE_D5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_E5,350);
+				// clock.wait(400);
+				// ev3_speaker_play_tone(NOTE_D5,150);
+				// clock.wait(1000);
+				// サザエさんここまで
+
+
+			//ファンファーレ
+				// ev3_speaker_play_tone(NOTE_D5,600);
+				// clock.wait(600);
+				// ev3_speaker_play_tone(NOTE_D5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_D5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_D5,600);
+				// clock.wait(650);
+				// ev3_speaker_play_tone(NOTE_D5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_D5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_F5,1000);
+				// clock.wait(1250);
+
+				// ev3_speaker_play_tone(NOTE_E5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_C5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_G4,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_F5,1000);
+				// clock.wait(1250);
+				// ev3_speaker_play_tone(NOTE_E5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_C5,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_G4,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_D5,1000);
+				// clock.wait(1250);
+
+				// ev3_speaker_play_tone(NOTE_G4,300);
+				// clock.wait(350);
+				// ev3_speaker_play_tone(NOTE_G4,150);
+				// clock.wait(200);
+				// ev3_speaker_play_tone(NOTE_D5,400);
+				// clock.wait(450);
+				// ev3_speaker_play_tone(NOTE_F5,400);
+				// clock.wait(450);
+				// ev3_speaker_play_tone(NOTE_E5,400);
+				// clock.wait(450);
+				// ev3_speaker_play_tone(NOTE_C5,400);
+				// clock.wait(450);
+				// ev3_speaker_play_tone(NOTE_G4,400);
+				// clock.wait(450);
+				// ev3_speaker_play_tone(NOTE_D5,800);
+				// clock.wait(850);
+
+				// ev3_speaker_play_tone(NOTE_D5,500);
+				// clock.wait(450);
+				// ev3_speaker_play_tone(NOTE_F5,500);
+				// clock.wait(450);
+				// ev3_speaker_play_tone(NOTE_E5,500);
+				// clock.wait(450);
+				// ev3_speaker_play_tone(NOTE_A5,500);
+				// clock.wait(450);
+				// ev3_speaker_play_tone(NOTE_F5,500);
+				// clock.wait(450);
+				// ev3_speaker_play_tone(NOTE_G5,1500);
+				// clock.wait(1700);
+
+				// ev3_speaker_play_tone(NOTE_G5,200);
+				// clock.wait(250);
+				// ev3_speaker_play_tone(NOTE_G5,200);
+				// clock.wait(250);
+				// ev3_speaker_play_tone(NOTE_G5,200);
+				// clock.wait(250);
+				// ev3_speaker_play_tone(NOTE_G5,2000);
+				// clock.wait(2000);
+			//ファンファーレここまで
+
 			currentcource = L_cource;
-			currentstate = START_L;
+			currentstate = START;
 
 			linetrace.SetEdge(1);
 
 			break;
 		}
 	}
+}
+void AreaManager::Brightness(){
+	bright = color.getBrightness();
 }
 
 void AreaManager::Manager(){
@@ -82,26 +209,19 @@ void AreaManager::Manager(){
 	int gray_on = 0;*/
 
 	/*モータの位置調整などは呼び出し前に済ませておく */
-
-	if(currentcource == R_cource){
+	if(currentcource == L_cource){
 
 		switch(currentstate){
 
 			case START:
-				fprintf(bt, "START\r\n");
-
 				local.Init();
 
 				msg_f("Ready ...", 1);
 
 				if(touch.isPressed() == 1){
 					msg_f("Go !", 1);
-					clock.wait(1500);	//数秒待つ
-					currentstate = STRAIGHT1;
-					//currentstate = STRAIGHT2;
-					//currentstate = CURVE3;
-					//currentstate = KENSHO;
-					//currentstate = PARKING;
+					clock.wait(1000);	//数秒待つ
+					currentstate = 20;
 					speed = 0;
 				}
 
@@ -109,105 +229,115 @@ void AreaManager::Manager(){
 
 
 			case STRAIGHT1:
-				fprintf(bt, "STRAIGHT1\r\n");
+				ev3_led_set_color(LED_GREEN);
 				//速め Motorでただの直進指示でもいいかも
-				msg_f("1", 3);
-				ev3_led_set_color(LED_RED);
-				/*linetrace.PIDSetRun(50, 0.35, 0.03, 0.025, 1);*/
-				if(speed < 50){
-					speed = speed + 1;
-				}//ここはいらないかも？
-				else if(speed > 50){
-					speed = speed - 1;
-				}
-				linetrace.PIDSetRun(speed, 0.365, 0.05, 0.120, 1);//ずれてる
-				//linetrace.PIDSetRun(speed ,0.45, 0.05, 0.120, 1); 
+				msg_f("3", 2);
+
+				// linetrace.PIDSetRun(bright, 30, 0.5, 0.5, 0.049, 1);
+				// linetrace.PIDSetRun(bright, 40, 0.2, 0.02, 0.1, 1);
+				linetrace.PIDSetRun(bright, 40, 0.25, 0.05, 0.05, 1);  //　これもめちゃ良い
+				// linetrace.PIDSetRun(bright, 40, 0.3, 0.05, 0.05, 1);  // 最強説
+				// linetrace.PIDSetRun(bright, 40, 0.325, 0.05, 0.05, 1);  // かなり綺麗
+				// linetrace.PIDSetRun(bright, 60, 0.450, 0.05, 0.120, 1);
+				//linetrace.PIDSetRun(bright, 60, 0.04, 0.02, 0.08, 1); // これも滑らか
+				// linetrace.PIDSetRun(bright, 90, 0.05, 0.02, 0.100, 1);  // これも滑らか
+				// linetrace.PIDSetRun(bright, 110, 0.075, 0.02, 0.120, 1);  // ハイスピード
+				//　左カーブは　0.450, 0.05, 0.120, 1 -> 最後のカーブ
 
 				local.SetPoint();
 
-				if(local.GetLen() >= 2300){/*単位はmm*/
-					local.Init();
+				//現在のxとthetaの値を再セットする
+				if(local.GetLen() >= 5000){//単位はmm
+					ev3_speaker_play_tone(NOTE_C5,500);
+					speed = 110;
 					currentstate = CURVE1;
 				}
-				
 				break;
 
+			case 20:  // 駐車用
+				// if (val < 20)
+				// {
+				// 	leftWheel.setPWM(0);
+    //     			rightWheel.setPWM(0);
+				// }
+				// else
+				// {
+				linetrace.PIDSetRun(bright, 20, 0.20, 0.05, 0.03, 1);
+				// }
+				local.SetPoint();
+				if(hey == 60)
+				{
+					currentstate = 30;
+				}
+
+				// int8_t val = ev3_infrared_sensor_get_distance(EV3_PORT_2);
+				// sprintf(msgbuf, "Distance: %-3d %%", val.distance);
+				// ev3_lcd_draw_string(msgbuf, 0, 20);
+
+				break;
+
+			case 30:
+				val = ev3_ultrasonic_sensor_get_distance(EV3_PORT_2);
+				if (val > 10)
+				{
+					leftWheel.setPWM(20);
+					rightWheel.setPWM(20);
+					count++;
+					sprintf(msgbuf, "Distance: %-3d cm", val);
+					ev3_lcd_draw_string(msgbuf, 0, 20);
+					break;
+				}
+
+				leftWheel.setPWM(0);
+				rightWheel.setPWM(0);
+				break;
 
 			case CURVE1:
-				fprintf(bt, "CURVE1\r\n");
-
-				//中速 ただの円弧なのでsteerの関数でもいいかも
-				msg_f("2", 3);
 				ev3_led_set_color(LED_GREEN);
-
-				if(speed > 50){
+				//速め Motorでただの直進指示でもいいかも
+				msg_f("3", 2);
+				// if(count < 50){
+				// 	leftWheel.setPWM(20);
+    // 	   			rightWheel.setPWM(30);
+    //    				count++;
+    //    				break;
+   	//    			}
+				if(speed > 40){
 					speed = speed - 1;
 				}
-				else if(speed < 50){
-					speed = speed + 1;
-				}
-
-				/*linetrace.PIDSetRun(25,0.32, 0.06, 0.025); */
-				linetrace.PIDSetRun(speed, 0.40, 0.03, 0.085, 1); 
+				linetrace.PIDSetRun(bright, 30, 0.25, 0.05, 0.05, 1);  //　これもめちゃ良い
+				// linetrace.PIDSetRun(bright, 60, 0.450, 0.05, 0.120, 1);
+				// linetrace.PIDSetRun(bright, speed, 0.2, 0.05, 0.12, 1); 
+				// linetrace.PIDSetRun(bright, speed, 0.2, 0.02, 0.08, 1); //一応曲がる
+				// linetrace.PIDSetRun(bright, 60, 0.02, 0.05, 0.12, 1); // まあまあ綺麗
+				// linetrace.PIDSetRun(bright, 30, 0.005, 0.05, 0.08, 1);  // 右カーブにはかなり良い
+				// linetrace.PIDSetRun(bright, speed, 0.075, 0.02, 0.120, 1); //かなり綺麗に曲がった（バッテリー入れ替えたらどうなるかわからん,speedは80)
+				// linetrace.PIDSetRun(bright, speed(80), 0.1, 0.02, 0.120, 1);  //割と上手く曲がった
+				//　左カーブは　0.450, 0.05, 0.120, 1 -> 最後のカーブ
 
 				local.SetPoint();
+
+				//現在のxとthetaの値を再セットする
+				// if(local.GetLen() >= 3700){//単位はmm
+				// 	ev3_speaker_play_tone(NOTE_C5,500);
+				// 	currentstate = STRAIGHT2;
+				// }				
+				break;
+				/*linetrace.PIDSetRun(25,0.32, 0.06, 0.025); */
+				// linetrace.PIDSetRun(speed, 0.40, 0.03, 0.085, 1); 
 
 				/*if(local.GetLen() >= 750){ 
 					local.Init();
 					currentstate = CURVE2;
 				}*/
 
-				if(local.GetX() < 0){
-					local.Init();
-					currentstate = CURVE2;
-					/*linetrace.SetEdge(-1);*/
-				}
+				// // if(local.GetX() < 0){
+				// // 	local.Init();
+				// // 	currentstate = CURVE2;
+				// // 	/*linetrace.SetEdge(-1);*/
 
-				break;
+				// break;
 
-
-			case CURVE2:
-				msg_f("3", 3);
-				//ev3_led_set_color(LED_ORANGE);
-				//中速 途中で曲がる方向が変わるのでedge切り替えするといいかも
-				/*linetrace.PIDSetRun(25,0.32, 0.06, 0.025);*/
-				
-				if(curve_f == 0){
-					ev3_led_set_color(LED_ORANGE);
-					if(speed > 30){
-						speed = speed - 1;
-					}
-					else if(speed < 30){
-						speed = speed + 1;
-					}
-					linetrace.PIDSetRun(speed, 0.40, 0.03, 0.085, 1);//30, 0.20, 0.070
-				}
-				else{
-					//linetrace.PIDSetRun(speed, 0.32, 0.03, 0.080, 1);
-					ev3_led_set_color(LED_GREEN);
-					if(speed > 40){
-						speed = speed - 1;
-					}
-					else if(speed < 40){
-						speed = speed + 1;
-					}
-					linetrace.PIDSetRun(speed, 0.30, 0.03, 0.065, 1);
-				}
-
-				local.SetPoint();
-
-				if(local.GetX() > 800 && curve_f == 0){
-					curve_f = 1;
-					msg_f("curve_finish", 4);
-				}
-				//if(local.GetY() > 550){
-				if(local.GetY() > 550){
-					local.Init();
-					currentstate = STRAIGHT2;
-					/*linetrace.SetEdge(1);*/
-				}
-
-				break;
 
 			
 			case STRAIGHT2:
@@ -215,6 +345,9 @@ void AreaManager::Manager(){
 				ev3_led_set_color(LED_RED);
 				//速め
 				//linetrace.PIDSetRun(70, 0.365, 0.05, 0.120, 1);
+				linetrace.PIDSetRun(bright, 60, 0.04, 0.02, 0.08, 1); // これも滑らか
+				// linetrace.PIDSetRun(bright, 0, 0.070, 0.02, 0.120, 1); //かなり綺麗に曲がった（バッテリー入れ替えたらどうなるかわからん）
+
 				if(speed < 80){
 					speed = speed + 1;
 				}
@@ -222,7 +355,7 @@ void AreaManager::Manager(){
 					speed = speed - 1;
 				}
 
-				linetrace.PIDSetRun(speed, 0.375, 0.05, 0.120, 1);//p 1.2  d 0.15
+				// linetrace.PIDSetRun(speed, 0.375, 0.05, 0.120, 1);//p 1.2  d 0.15
 
 				local.SetPoint();
 
@@ -233,11 +366,11 @@ void AreaManager::Manager(){
 					linetrace.SetEdge(-1);
 				}*/
 
-				if(local.GetLen() >= 1800/*1700*/){
-					local.Init();
-					linetrace.Setgray(45);
-					currentstate = CURVE3;
-				}
+				// if(local.GetLen() >= 1800/*1700*/){
+				// 	local.Init();
+				// 	linetrace.Setgray(45);
+				// 	currentstate = CURVE3;
+				// }
 
 
 				//Localizationで走行距離を測って直線が終わったら
@@ -267,7 +400,7 @@ void AreaManager::Manager(){
 					else if(speed < 30){
 						speed = speed + 1;
 					}
-					linetrace.PIDSetRun(speed, 0.30, 0.00, 0.065, 1);//p 0.28 i 0.03 d 0.050
+					// linetrace.PIDSetRun(speed, 0.30, 0.00, 0.065, 1);//p 0.28 i 0.03 d 0.050
 					//steer.setPower(20, 0); //試験用
 					local.SetPoint();
 				}
@@ -344,7 +477,7 @@ void AreaManager::Manager(){
 							else if(speed < 25){
 								speed = speed + 1;
 							} 
-							linetrace.PIDSetRun(speed, 0.25, 0.00, 0.040, 1);//d 0.045
+							// linetrace.PIDSetRun(speed, 0.25, 0.00, 0.040, 1);//d 0.045
 							//steer.setPower(20, 0); //試験用
 							second++;
 							local.SetPoint();
@@ -536,7 +669,7 @@ Parking:
 				//goto End;*/
 
 				if(local.GetX() < 420 && park == 0){
-					linetrace.PIDSetRun(15, 0.35, 0.00, 0.030, -1);//d 0.020
+					// linetrace.PIDSetRun(15, 0.35, 0.00, 0.030, -1);//d 0.020
 					local.SetPoint();
 				}
 				else if(local.GetX() >= 420 && park == 0){
@@ -549,7 +682,7 @@ Parking:
 					}
 				}
 				else{//park == 1の時
-					linetrace.PIDSetRun(15, 0.35, 0.00, 0.027, 1);//p 0.35
+					// linetrace.PIDSetRun(15, 0.35, 0.00, 0.027, 1);//p 0.35
         			local.SetPoint();
 				}
 
@@ -582,7 +715,7 @@ End:
 	}
 
 /*
-Lコース
+Rコース
 modified by Takahashi 2018/06/11
 STRAIGHT_L1
 CURVE_L1 (左回転)
@@ -600,7 +733,7 @@ LineTrace::PIDSetRun(int pwm,float newp,float newi,float newd,float curve)
 	左折の時はP小さめ、右折の時はP大きめ
 */
 
-	else if(currentcource == L_cource){
+	else if(currentcource == R_cource){
 
 		switch(currentstate){
 
@@ -611,12 +744,16 @@ LineTrace::PIDSetRun(int pwm,float newp,float newi,float newd,float curve)
 				msg_f("Ready ...", 1);
 				if(touch.isPressed() == 1){
 					msg_f("Go !", 1);
-					clock.wait(1500);	//数秒待つ
+					clock.wait(1000);	//数秒待つ
+					speed = 0;
 					currentstate = STRAIGHT_L1;
 				}
 				break;
 
 			case STRAIGHT_L1:
+//				ev3_speaker_play_tone(NOTE_AS4,300);
+				speed = 30;
+				linetrace.PIDSetRun(bright, 60, 0.100, 0.05, 0.400, -1);
 				ev3_led_set_color(LED_GREEN);
 				//速め Motorでただの直進指示でもいいかも
 				msg_f("L_S1", 3);
@@ -626,22 +763,29 @@ LineTrace::PIDSetRun(int pwm,float newp,float newi,float newd,float curve)
 				else if(speed > 50){
 					speed = speed - 1;
 				}
-				linetrace.PIDSetRun(speed, 0.300, 0.05, 0.150, 1);
+				// linetrace.PIDSetRun(speed, 0.100, 0.05, 0.100, 1);
 				//　左カーブは　0.450, 0.05, 0.120, 1 -> 最後のカーブ
 
 				local.SetPoint();
 
-				//現在のxとthetaの値を再セットする
-				if(local.GetX() >= 2260){//単位はmm
-					//local.Init();
-					int theta, x;
-					x = local.GetX();
-					theta = local.GetTheta();
-					local.CorrectLocalization(x, 0, theta, 3);
-					//currentstate = CURVE_L1;
-				}
-                
+				// //現在のxとthetaの値を再セットする
+				// if(local.GetLen() >= 3000){//単位はmm
+				// 	currentstate = 20;
+				// }                
 				break;
+
+			case 20:
+//				ev3_speaker_play_tone(NOTE_AS4,300);
+				if(speed < 50){
+					speed = speed + 1;
+				}//ここはいらないかも？
+				else if(speed > 50){
+					speed = speed - 1;
+				}
+				// linetrace.PIDSetRun(speed, 0.200, 0.05, 0.100, 1);
+				currentstate = 20;
+			    break;
+
 
 			case CURVE_L1://左回転
 				ev3_led_set_color(LED_RED);
@@ -652,7 +796,7 @@ LineTrace::PIDSetRun(int pwm,float newp,float newi,float newd,float curve)
 				else if(speed > 38){
 					speed = speed - 1;
 				}
-				linetrace.PIDSetRun(speed, 0.55, 0.03, 0.070, 1);
+				// linetrace.PIDSetRun(speed, 0.55, 0.03, 0.070, 1);
 
 				local.SetPoint();
 
@@ -693,7 +837,7 @@ LineTrace::PIDSetRun(int pwm,float newp,float newi,float newd,float curve)
  				  		second--;
 					}
 					else{
-						linetrace.PIDSetRun(speed, 0.450, 0.05, 0.100, -1);//p 0.500 d 0.100
+						// linetrace.PIDSetRun(speed, 0.450, 0.05, 0.100, -1);//p 0.500 d 0.100
 					}
 				}
 
@@ -722,7 +866,7 @@ LineTrace::PIDSetRun(int pwm,float newp,float newi,float newd,float curve)
 					correct = 1;
 				}
 
-				linetrace.PIDSetRun(speed, 0.35, 0.03, 0.060, 1);//良さげ 0.35, 0.50 折原
+				// linetrace.PIDSetRun(speed, 0.35, 0.03, 0.060, 1);//良さげ 0.35, 0.50 折原
 
 				local.SetPoint();
 
@@ -751,7 +895,7 @@ LineTrace::PIDSetRun(int pwm,float newp,float newi,float newd,float curve)
 					speed = speed - 1;
 				}
 				ev3_led_set_color(LED_ORANGE);
-				linetrace.PIDSetRun(speed, 0.47, 0.03, 0.075, 1);//0.55, 0.080ok
+				// linetrace.PIDSetRun(speed, 0.47, 0.03, 0.075, 1);//0.55, 0.080ok
 
 				local.SetPoint();
 
@@ -798,7 +942,7 @@ LineTrace::PIDSetRun(int pwm,float newp,float newi,float newd,float curve)
 
 				}
 				else if(local.GetLen() < 750 && park_l2 ==  0){
-					linetrace.PIDSetRun(30, 0.30, 0.00, 0.040, -1);//15 0.35 0.00 0.030 -1
+					// linetrace.PIDSetRun(30, 0.30, 0.00, 0.040, -1);//15 0.35 0.00 0.030 -1
 					local.SetPoint();
 				}
 				else if(local.GetLen() >= 750 && park_l2 ==  0){
@@ -839,7 +983,7 @@ LineTrace::PIDSetRun(int pwm,float newp,float newi,float newd,float curve)
 				//local.SetPoint();
 
 				if(local.GetLen() < 1100){//1000
-					linetrace.PIDSetRun(25, 0.320, 0, 0.060, -1);
+					// linetrace.PIDSetRun(25, 0.320, 0, 0.060, -1);
         			local.SetPoint();
 				}
 				else{
@@ -876,7 +1020,7 @@ LineTrace::PIDSetRun(int pwm,float newp,float newi,float newd,float curve)
 					while(color_on == 0){
 
 						local.SetPoint();
-						linetrace.PIDSetRun(5,0.05,0,0.009,-1);//5,0.20,0,0.009
+						// linetrace.PIDSetRun(5,0.05,0,0.009,-1);//5,0.20,0,0.009
 
 						if(color.getColorNumber() == 3){
 
@@ -991,7 +1135,10 @@ End_L:
 		
 	}*/
 
-	else{ leftWheel.stop(); rightWheel.stop(); }
+	else{ 
+		leftWheel.stop(); 
+		rightWheel.stop();
+	}
 
 }
 
@@ -1033,6 +1180,6 @@ void AreaManager::NumberDisplay(int codecount){
 		}
 }
 
-void AreaManager::regularLine(){
-		linetrace.PIDSetRun(25, 0.320, 0, 0.060, 1);
-}
+// void AreaManager::regularLine(){
+// 		linetrace.PIDSetRun(25, 0.320, 0, 0.060, 1);
+// }

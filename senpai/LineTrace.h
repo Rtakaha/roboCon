@@ -1,3 +1,4 @@
+// senpai
 /*
 * Linetrace.h
 * written by kimoto on 2017/06/16
@@ -15,6 +16,7 @@
 #include "Steering.h"
 #include "PID.h"
 #include "util.h"
+extern int hey;
 
 //#include "BoundaryDefine.h"
 //#include "MotorDrive.h"
@@ -43,7 +45,7 @@ public:
     
     void SetEdge(int newedge);		
 
-    void PIDSetRun(int pwm,float newp,float newi,float newd,float curve);
+    void PIDSetRun(int bright, int pwm,float newp,float newi,float newd,float curve);
     void Calibration();
     float NormalizeLine(int value);
     void Rotate(int gyr);
